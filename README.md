@@ -18,15 +18,9 @@ Steps to build and run the application:
         make
 After "make" command executable with name "app" will be created in build/bin directory.
 
-To run tests
-./app tests
+     To run tests
+        ./app test
 
-To run with custom files you need to specify input and output files
+    To run with custom files you need to specify input and output files
+    ./app 'path/to/input/file' 'path/to/output/file'
 
-./app 'path/to/input/file' 'path/to/output/file'
-
-All configuration for redis should be specified in redis.conf file.
-
-		To run executable
-
-    ./kms
