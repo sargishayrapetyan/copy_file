@@ -2,14 +2,11 @@ Requirements
 ---
 * compiler version -  gcc 9.4.0(C++17) or higher
 
-* libraries - Standart Template Library(STL)
+* libraries - Standard Template Library(STL)
 
-Steps to setup project
---------
+* OS - Linux(tested on Ubuntu)
 
-Build from source
-
-Usage
+Build and Usage
 ---
 Steps to build and run the application:
 
@@ -24,3 +21,6 @@ current directory with the same name.
     To run with custom files you need to specify input and output files
     ./app 'path/to/input/file' 'path/to/output/file'
 
+
+Note:
+The input files should contain only characters which could be represented in ASCII.
