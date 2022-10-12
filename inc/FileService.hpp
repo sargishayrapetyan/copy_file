@@ -41,6 +41,7 @@ class FileService {
     private:
         void closeFiles();
         void openFilesIfNeeded();
+		void sortEachWord(const std::string& aLine);
 
     private:
         std::string m_InputFileName;

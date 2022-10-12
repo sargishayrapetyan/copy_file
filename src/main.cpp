@@ -73,33 +73,33 @@ void multipleSequentialCalls() {
     FileService lFileService {lInputFileName, lOutputFileName};
 
     //source
-    lFileService.copyLinesBySorting();
-    lFileService.copyLinesBySorting();
-    lFileService.copyLinesBySorting();
-    lFileService.copyLinesBySorting();
+	lFileService.copyLinesBySorting();
+	lFileService.copyLinesBySorting();
+	lFileService.copyLinesBySorting();
+	lFileService.copyLinesBySorting();
 
-    //expectation
-    std::cout << "---------------------"<< __FUNCTION__ << std::endl;
-    assert(std::filesystem::exists(lOutputFileName) && "output file has not been created");
+	//expectation
+	std::cout << "---------------------"<< __FUNCTION__ << std::endl;
+	assert(std::filesystem::exists(lOutputFileName) && "output file has not been created");
 
-    std::ifstream lInputFile(lInputFileName, std::ios_base::in | std::ios_base::binary);
-    std::ifstream lOutputFile(lOutputFileName, std::ios_base::in | std::ios_base::binary | std::ios_base::app);
-    size_t lInputFileLineCount = std::count(std::istreambuf_iterator<char>(lInputFile), std::istreambuf_iterator<char>(), '\n');
-    size_t lOutputFileLineCount = std::count(std::istreambuf_iterator<char>(lOutputFile), std::istreambuf_iterator<char>(), '\n');
-    size_t lOutputFileSize = std::filesystem::file_size(lOutputFileName);
+	std::ifstream lInputFile(lInputFileName, std::ios_base::in | std::ios_base::binary);
+	std::ifstream lOutputFile(lOutputFileName, std::ios_base::in | std::ios_base::binary | std::ios_base::app);
+	size_t lInputFileLineCount = std::count(std::istreambuf_iterator<char>(lInputFile), std::istreambuf_iterator<char>(), '\n');
+	size_t lOutputFileLineCount = std::count(std::istreambuf_iterator<char>(lOutputFile), std::istreambuf_iterator<char>(), '\n');
+	size_t lOutputFileSize = std::filesystem::file_size(lOutputFileName);
 
-    assert(lInputFileLineCount == lOutputFileLineCount && "input and output files lines are not equal");
-    assert(lInputFileLineCount != 0 && "files are empty");
-    assert(lInputFileSize == lOutputFileSize && "input and output files sizes are not equal");
-    assert(lInputFileSize != 0 && "files size equal to 0");
-    std::cout << "---------------------" << __FUNCTION__ << " passed\n" << std::endl;
+	assert(lInputFileLineCount == lOutputFileLineCount && "input and output files lines are not equal");
+	assert(lInputFileLineCount != 0 && "files are empty");
+	assert(lInputFileSize == lOutputFileSize && "input and output files sizes are not equal");
+	assert(lInputFileSize != 0 && "files size equal to 0");
+	std::cout << "---------------------" << __FUNCTION__ << " passed\n" << std::endl;
 
-    std::filesystem::remove(lOutputFileName);
+	std::filesystem::remove(lOutputFileName);
 }
 
 void runTests() {
-    multipleSequentialCalls();
-    basicTest();
+	multipleSequentialCalls();
+	basicTest();
     emptyInputFileTest();
 }
 
