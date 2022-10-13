@@ -6,6 +6,24 @@
 
 const std::string testDataDir {"test_data/"};
 
+bool isWordsSorted(const std::string& aFilePath) {
+	std::ifstream lIf(aFilePath, std::ios_base::in | std::ios_base::binary);
+	std::string lLine{""};
+	std::string lWord{""};
+    while(getline(lIf, lLine)) {
+		std::stringstream lStrLine;
+		lStrLine << lLine;
+		while(lStrLine >> lWord) {
+			if (!std::is_sorted(lWord.begin(), lWord.end())) {
+				std::cout << "word which not sorted " << lWord << std::endl;
+				return false;
+			}
+		}
+    }
+	
+	return true;
+}
+
 void basicTest() {
     //preparation
     const std::string lInputFileName {testDataDir + "basicTest.txt"};
@@ -30,8 +48,9 @@ void basicTest() {
     assert(lInputFileLineCount != 0 && "files are empty");
     assert(lInputFileSize == lOutputFileSize && "input and output files size are not equal");
     assert(lInputFileSize != 0 && "files size equal to 0");
-    std::cout << "---------------------" << __FUNCTION__ << " passed\n" << std::endl;
+	assert(isWordsSorted(lOutputFileName) && "words are not sorted");
 
+    std::cout << "---------------------" << __FUNCTION__ << " passed\n" << std::endl;
     std::filesystem::remove(lOutputFileName);
 }
 
@@ -59,6 +78,7 @@ void emptyInputFileTest() {
     assert(lInputFileLineCount == 0 && "files are not empty");
     assert(lInputFileSize == lOutputFileSize && "input and output files size are not equal");
     assert(lInputFileSize == 0 && "files are not empty");
+	assert(isWordsSorted(lOutputFileName) && "words are not sorted");
     std::cout << "---------------------" << __FUNCTION__ << " passed\n" << std::endl;
 
     std::filesystem::remove(lOutputFileName);
@@ -92,6 +112,7 @@ void multipleSequentialCalls() {
 	assert(lInputFileLineCount != 0 && "files are empty");
 	assert(lInputFileSize == lOutputFileSize && "input and output files sizes are not equal");
 	assert(lInputFileSize != 0 && "files size equal to 0");
+	assert(isWordsSorted(lOutputFileName) && "words are not sorted");
 	std::cout << "---------------------" << __FUNCTION__ << " passed\n" << std::endl;
 
 	std::filesystem::remove(lOutputFileName);
