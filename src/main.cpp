@@ -124,19 +124,22 @@ void runTests() {
     emptyInputFileTest();
 }
 
+
+
 int main(int argc, char** argv) {
     if (argc == 2) {
         const std::string command = argv[1];
-        if (command == "test") {
-            runTests();
-        } else {
-            std::cout << "Invalid command line option: " << command << std::endl; 
-        }
+//      if (command == "test") {
+//          runTests();
+//      } else {
+//          std::cout << "Invalid command line option: " << command << std::endl; 
+//      }
     } else if (argc == 3) {
         const std::string lInputFileName = argv[1];
         const std::string lOutputFileName = argv[2];
         FileService lFileService {lInputFileName, lOutputFileName};
-        lFileService.copyLinesBySorting();
+        lFileService.copySortedWordsLine();
+        //lFileService.copyLinesBySorting();
     } else {
         std::cout << "Invalid argument provided!!!" << std::endl;
     }

@@ -34,6 +34,7 @@ class FileService {
         std::string getOutputFileName() const;
         
         void copyLinesBySorting();
+		void copySortedWordsLine();
 
     public:
         virtual ~FileService();
@@ -42,6 +43,7 @@ class FileService {
         void closeFiles();
         void openFilesIfNeeded();
 		void sortEachWord(const std::string& aLine);
+		void sortWords(const std::string& aLine);
 
     private:
         std::string m_InputFileName;

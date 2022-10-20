@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <iterator>
 
 FileService::FileService(const std::string& aInputFileName, const std::string& aOutputFileName) 
     : m_InputFileName(aInputFileName)
@@ -20,6 +21,30 @@ void FileService::copyLinesBySorting() {
     }
     closeFiles();
 }
+
+void FileService::copySortedWordsLine() {
+    openFilesIfNeeded();
+    std::string lLine{""};
+    while(getline(m_Ifstream, lLine)) {
+		sortWords(lLine);
+    }
+    closeFiles();
+}
+
+void FileService::sortWords(const std::string& aLine) {
+	std::stringstream lStrLine(aLine);
+	std::string lWord{};
+	std::vector<std::string> lWords{};
+	while(lStrLine >> lWord) {
+		lWords.push_back(lWord);
+	}
+	std::sort(lWords.begin(), lWords.end());
+	std::ostringstream lSorted;
+	const char* lDelim = " ";
+	std::copy(lWords.begin(), lWords.end(), std::ostream_iterator<std::string>(lSorted, lDelim));
+	m_Ofstream << lSorted.str() << '\n';	
+}
+
 
 void FileService::sortEachWord(const std::string& aLine) {
 	const char lDelim = ' ';
